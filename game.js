@@ -255,16 +255,23 @@ let mouse = { x: 0, y: 0, down: false };
 window.addEventListener('keydown', e => keys[e.code] = true);
 window.addEventListener('keyup', e => keys[e.code] = false);
 window.addEventListener('mousemove', e => {
-    mouse.x = e.clientX; mouse.y = e.clientY;
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
     if (gameRunning) player.angle = Math.atan2(mouse.y - player.y, mouse.x - player.x);
 });
 
 function handleInteraction(x, y) {
-    mouse.x = x;
-    mouse.y = y;
-    player.angle = Math.atan2(mouse.y - player.y, mouse.x - player.x);
+    const rect = canvas.getBoundingClientRect();
+    const canvasX = x - rect.left;
+    const canvasY = y - rect.top;
+
+    mouse.x = canvasX;
+    mouse.y = canvasY;
+
     if (gameRunning) {
-        // Instant fire on tap
+        player.angle = Math.atan2(mouse.y - player.y, mouse.x - player.x);
+        // Instant fire towards the tapped point
         bullets.push({
             x: player.x, y: player.y,
             vx: Math.cos(player.angle) * 12,
@@ -286,9 +293,11 @@ window.addEventListener('touchstart', e => {
 }, { passive: false });
 
 window.addEventListener('touchmove', e => {
+    if (!gameRunning) return;
     const touch = e.touches[0];
-    mouse.x = touch.clientX;
-    mouse.y = touch.clientY;
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = touch.clientX - rect.left;
+    mouse.y = touch.clientY - rect.top;
     player.angle = Math.atan2(mouse.y - player.y, mouse.x - player.x);
     e.preventDefault();
 }, { passive: false });
