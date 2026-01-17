@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golam Rabbani | Terminal Defense</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="bg-dark game-active">
+    <div class="game-container">
+        <!-- HUD -->
+        <div class="game-hud">
+            <div class="hud-top">
+                <div class="player-stat">
+                    <span class="label">SEC_UNIT:</span>
+                    <span class="value">GOLAM_RABBANI</span>
+                </div>
+                <div class="stability-stat">
+                    <span class="label">MEMORY_STABILITY:</span>
+                    <div class="stability-bar">
+                        <div id="stability-fill" class="fill"></div>
+                    </div>
+                </div>
+                <div class="score-stat">
+                    <span class="label">DATA_SYNC:</span>
+                    <span id="score-value" class="value">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="canvas-wrapper">
+            <!-- Sidebar for Unlocked Data -->
+            <div id="profile-sidebar" class="sidebar">
+                <div class="sidebar-header">DECRYPTED_LOGS</div>
+                <div id="sidebar-list" class="sidebar-list">
+                    <!-- Unlocked items will appear here -->
+                    <div class="sidebar-placeholder">COLLECT_SHARDS_TO_UNLOCK</div>
+                </div>
+            </div>
+
+            <canvas id="game-canvas"></canvas>
+
+            <!-- Terminal Overlay -->
+            <div id="data-overlay" class="overlay hidden">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <span id="overlay-title">FILE_DECRYPTED</span>
+                        <button id="close-overlay">X</button>
+                    </div>
+                    <div id="overlay-content" class="terminal-body"></div>
+                </div>
+            </div>
+
+            <!-- Start Screen -->
+            <div id="start-screen" class="overlay">
+                <div class="start-card shooter-start">
+                    <div class="avatar-container" style="margin-bottom: 20px;">
+                        <img src="avatar.jpg" class="start-avatar"
+                            style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; box-shadow: 0 0 20px var(--primary);">
+                    </div>
+                    <h1 class="glitch" data-text="TERMINAL DEFENSE">TERMINAL DEFENSE</h1>
+                    <h3 class="explore-prompt">KILL THE VIRUS AND SEE MY PROFILE</h3>
+                    <p class="mission-text">MISSION: First log @ 5 hits, subsequent logs every +6 hits.</p>
+
+                    <div class="instructions-grid">
+                        <div class="instr-item">
+                            <span class="key-large">ARROWS / WASD</span>
+                            <p>MOVE SYSTEM UNIT</p>
+                        </div>
+                        <div class="instr-item">
+                            <span class="key-large">SPACE / LEFT-CLICK</span>
+                            <p>FIRE DEBUG PULSE</p>
+                        </div>
+                    </div>
+
+                    <div class="enemy-intel">
+                        <div class="intel-box">
+                            <div class="intel-icon bug"></div>
+                            <span>BUG: Destroy them</span>
+                        </div>
+                        <div class="intel-box">
+                            <div class="intel-icon shard"></div>
+                            <span>SHARD: Collect for info</span>
+                        </div>
+                    </div>
+
+                    <button id="start-btn">BOOT_SYSTEM_V.2.0.4</button>
+                </div>
+            </div>
+
+            <!-- Failure Screen -->
+            <div id="fail-screen" class="overlay hidden">
+                <div class="fail-card">
+                    <h2 class="alert">MEMORY_CORRUPTED</h2>
+                    <p id="fail-reason">CORE_STABILITY_FAILURE</p>
+                    <div class="progress-info">
+                        <span>PROFESSIONAL_SYNC:</span>
+                        <h3 id="fail-percent">0%</h3>
+                    </div>
+                    <button id="retry-btn">RELOAD_STABLE_CACHE</button>
+                </div>
+            </div>
+
+            <!-- Victory Screen (Resume) -->
+            <div id="victory-screen" class="overlay hidden">
+                <div class="resume-container">
+                    <div class="resume-header">
+                        <h2 class="glitch">QUEST MASTERED: CORE_SYNC_COMPLETE</h2>
+                        <div class="resume-actions">
+                            <button onclick="window.print()">PRINT_RESUME</button>
+                            <button onclick="location.reload()">REPLAY_SCENARIO</button>
+                            <a href="mailto:golamrabbani3587@gmail.com" class="hire-btn">ESTABLISH_LINK</a>
+                        </div>
+                    </div>
+                    <div id="full-resume-content" class="resume-body">
+                        <!-- Loaded via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="game-footer">
+            <div class="status-bar">
+                <div class="status-item">PROCESSOR: OPTIMIZED</div>
+                <div class="status-item">ENCRYPTION: AES-256</div>
+                <div class="status-item">NODE_V: 20.x</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
