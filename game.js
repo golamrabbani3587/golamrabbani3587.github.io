@@ -256,10 +256,44 @@ window.addEventListener('keydown', e => keys[e.code] = true);
 window.addEventListener('keyup', e => keys[e.code] = false);
 window.addEventListener('mousemove', e => {
     mouse.x = e.clientX; mouse.y = e.clientY;
-    player.angle = Math.atan2(mouse.y - player.y, mouse.x - player.x);
+    if (gameRunning) player.angle = Math.atan2(mouse.y - player.y, mouse.x - player.x);
 });
-window.addEventListener('mousedown', () => mouse.down = true);
+
+function handleInteraction(x, y) {
+    mouse.x = x;
+    mouse.y = y;
+    player.angle = Math.atan2(mouse.y - player.y, mouse.x - player.x);
+    if (gameRunning) {
+        // Instant fire on tap
+        bullets.push({
+            x: player.x, y: player.y,
+            vx: Math.cos(player.angle) * 12,
+            vy: Math.sin(player.angle) * 12
+        });
+    }
+}
+
+window.addEventListener('mousedown', e => {
+    handleInteraction(e.clientX, e.clientY);
+    mouse.down = true;
+});
 window.addEventListener('mouseup', () => mouse.down = false);
+
+window.addEventListener('touchstart', e => {
+    const touch = e.touches[0];
+    handleInteraction(touch.clientX, touch.clientY);
+    mouse.down = true;
+}, { passive: false });
+
+window.addEventListener('touchmove', e => {
+    const touch = e.touches[0];
+    mouse.x = touch.clientX;
+    mouse.y = touch.clientY;
+    player.angle = Math.atan2(mouse.y - player.y, mouse.x - player.x);
+    e.preventDefault();
+}, { passive: false });
+
+window.addEventListener('touchend', () => mouse.down = false);
 
 function spawnEnemy() {
     if (!gameRunning) return;
@@ -281,10 +315,23 @@ function createParticles(x, y, color) {
 function update() {
     if (!gameRunning) return;
     frameCount++;
+    // Player Movement (Keyboard)
     if (keys['KeyW'] || keys['ArrowUp']) player.y -= player.speed;
     if (keys['KeyS'] || keys['ArrowDown']) player.y += player.speed;
     if (keys['KeyA'] || keys['ArrowLeft']) player.x -= player.speed;
     if (keys['KeyD'] || keys['ArrowRight']) player.x += player.speed;
+
+    // Player Movement (Mobile/Mouse Follow)
+    if (mouse.down) {
+        const dx = mouse.x - player.x;
+        const dy = mouse.y - player.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist > 30) {
+            player.x += (dx / dist) * player.speed;
+            player.y += (dy / dist) * player.speed;
+        }
+    }
+
     player.x = Math.max(player.size, Math.min(canvas.width - player.size, player.x));
     player.y = Math.max(player.size, Math.min(canvas.height - player.size, player.y));
 

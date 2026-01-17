@@ -421,6 +421,127 @@ button:hover,
     margin-bottom: 15px;
 }
 
+/* Responsive Mobile Fixes */
+@media (max-width: 768px) {
+    .hud-top {
+        flex-direction: column;
+        gap: 10px;
+        font-size: 0.6rem;
+    }
+
+    .stability-stat {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .stability-bar {
+        height: 8px;
+    }
+
+    .sidebar {
+        top: auto;
+        bottom: 50px;
+        left: 0;
+        width: 100%;
+        height: auto;
+        border-left: none;
+        border-right: none;
+        background: rgba(10, 10, 20, 0.95);
+    }
+
+    .sidebar-header {
+        font-size: 0.6rem;
+        text-align: center;
+    }
+
+    .sidebar-list {
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        height: 60px;
+        padding: 5px;
+        gap: 10px;
+    }
+
+    .sidebar-item {
+        border-left: none;
+        border-bottom: 2px solid var(--primary);
+        white-space: nowrap;
+        padding: 5px 10px;
+        font-size: 0.6rem;
+    }
+
+    .sidebar-placeholder {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .start-card,
+    .victory-card,
+    .fail-card {
+        padding: 25px;
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .instructions-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .key-large {
+        font-size: 0.9rem;
+    }
+
+    .explore-prompt {
+        font-size: 0.8rem;
+    }
+
+    .mission-text {
+        margin-bottom: 15px;
+    }
+
+    .terminal-window {
+        width: 95%;
+        height: 85%;
+    }
+
+    .terminal-body {
+        padding: 20px;
+        font-size: 1rem;
+    }
+
+    .resume-container {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .resume-body {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .resume-header-main {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .resume-header-main img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .resume-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
 @media print {
 
     .overlay,
