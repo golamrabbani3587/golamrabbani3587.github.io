@@ -10,6 +10,7 @@ const victoryScreen = document.getElementById('victory-screen');
 const failScreen = document.getElementById('fail-screen');
 const startBtn = document.getElementById('start-btn');
 const retryBtn = document.getElementById('retry-btn');
+const nextStepBtn = document.getElementById('next-step-btn');
 const nextLogInfo = document.getElementById('score-value');
 const stabilityFill = document.getElementById('stability-fill');
 const fullResumeContent = document.getElementById('full-resume-content');
@@ -469,6 +470,7 @@ function showData(id) {
 }
 
 closeOverlay.addEventListener('click', () => { dataOverlay.classList.add('hidden'); gameRunning = true; });
+nextStepBtn.addEventListener('click', () => { dataOverlay.classList.add('hidden'); gameRunning = true; });
 startBtn.addEventListener('click', () => {
     startScreen.classList.add('hidden');
     player.x = canvas.width / 2; player.y = canvas.height / 2;
